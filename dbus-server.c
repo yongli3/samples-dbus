@@ -142,6 +142,8 @@ DBusHandlerResult server_get_all_properties_handler(DBusConnection *conn, DBusMe
  * as d-feet(1) and can be queried by:
  *
  * $ gdbus introspect --session --dest org.example.TestServer --object-path /org/example/TestObject
+
+ dbus-send --session --dest=org.example.TestServer --type=method_call --print-reply /org/example/TestObject  org.example.TestInterface.Quit
  */
 DBusHandlerResult server_message_handler(DBusConnection *conn, DBusMessage *message, void *data)
 {
@@ -285,7 +287,7 @@ int main(void)
 	DBusError err;
 	int rv;
 
-        dbus_error_init(&err);
+    dbus_error_init(&err);
 
 	/* connect to the daemon bus */
 	conn = dbus_bus_get(DBUS_BUS_SESSION, &err);
